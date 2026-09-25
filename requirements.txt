@@ -1,0 +1,10 @@
+yfinance
+pandas
+requests
+openpyxl
+beautifulsoup4
+lxml
+python-dotenv
+statsmodels
+matplotlib
+seaborn

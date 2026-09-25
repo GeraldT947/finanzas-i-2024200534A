@@ -1,0 +1,26 @@
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:             indice_bvl   R-squared:                       0.594
+Model:                            OLS   Adj. R-squared:                  0.588
+Method:                 Least Squares   F-statistic:                     85.76
+Date:                Fri, 25 Sep 2026   Prob (F-statistic):           1.17e-23
+Time:                        03:55:11   Log-Likelihood:                -1132.7
+No. Observations:                 120   AIC:                             2271.
+Df Residuals:                     117   BIC:                             2280.
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+================================================================================
+                   coef    std err          t      P>|t|      [0.025      0.975]
+--------------------------------------------------------------------------------
+const         1.208e+04   4965.220      2.432      0.017    2244.519    2.19e+04
+tipo_cambio  -3065.4797   1861.122     -1.647      0.102   -6751.335     620.375
+precio_cobre  5577.1683    633.839      8.799      0.000    4321.884    6832.453
+==============================================================================
+Omnibus:                        3.462   Durbin-Watson:                   0.121
+Prob(Omnibus):                  0.177   Jarque-Bera (JB):                2.444
+Skew:                          -0.180   Prob(JB):                        0.295
+Kurtosis:                       2.401   Cond. No.                         92.5
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.

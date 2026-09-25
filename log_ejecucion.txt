@@ -1,0 +1,28 @@
+2026-09-25 03:32:25,055 - INFO - ========== INICIO ==========
+2026-09-25 03:32:25,056 - INFO - BCRP: indice_general_bvl (PN01142MM)
+2026-09-25 03:32:25,529 - INFO - HTTP 200 para indice_general_bvl
+2026-09-25 03:32:25,545 - INFO - Guardado: ../datos_crudos/bcrp_indice_general_bvl_2024200534A.csv (120 filas)
+2026-09-25 03:32:25,546 - INFO - Yahoo: tipo_cambio (PEN=X)
+2026-09-25 03:32:25,861 - INFO - Guardado: ../datos_crudos/yahoo_tipo_cambio_2024200534A.csv (2605 filas)
+2026-09-25 03:32:25,862 - INFO - Yahoo: precio_cobre (HG=F)
+2026-09-25 03:32:26,022 - INFO - Guardado: ../datos_crudos/yahoo_precio_cobre_2024200534A.csv (2513 filas)
+2026-09-25 03:32:26,022 - INFO - Duracion: 0:00:00.966152
+2026-09-25 03:32:26,023 - INFO - ========== FIN ==========
+2026-09-25 03:41:22,428 - INFO - === INICIO LIMPIEZA ===
+2026-09-25 03:41:22,441 - INFO - Indice cargado: 120 filas mensuales
+2026-09-25 03:41:22,470 - INFO - tipo_cambio cargado y agregado a mensual: 120 filas
+2026-09-25 03:41:22,487 - INFO - precio_cobre cargado y agregado a mensual: 120 filas
+2026-09-25 03:41:22,502 - INFO - Dataset unificado: 120 filas, 4 columnas
+2026-09-25 03:41:22,502 - INFO - Columnas: ['fecha', 'indice_bvl', 'tipo_cambio', 'precio_cobre']
+2026-09-25 03:41:22,503 - INFO - Rango: 2015-01-01 00:00:00 a 2024-12-01 00:00:00
+2026-09-25 03:41:22,517 - INFO - Guardado: ../datos_procesados/datos_procesados_2024200534A.csv
+2026-09-25 03:41:22,519 - INFO - Hash SHA-256: 97e88c8ce2c6b21db547f6f141dc9ae96eafa9edd934eb05f2efc1a43c4f21c1
+2026-09-25 03:55:10,408 - INFO - === INICIO ANALISIS ===
+2026-09-25 03:55:10,421 - INFO - Datos cargados: 120 filas
+2026-09-25 03:55:10,575 - INFO - Tabla descriptivos guardada
+2026-09-25 03:55:11,014 - INFO - Matriz de correlacion guardada
+2026-09-25 03:55:11,784 - INFO - Grafico de series guardado
+2026-09-25 03:55:11,811 - INFO - R2 del modelo: 0.5945
+2026-09-25 03:55:11,854 - INFO - Regresiones guardadas
+2026-09-25 03:55:12,303 - INFO - Graficos de dispersion guardados
+2026-09-25 03:55:12,304 - INFO - === FIN ANALISIS ===
