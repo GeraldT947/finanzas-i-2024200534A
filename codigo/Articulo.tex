@@ -1,0 +1,523 @@
+\documentclass[12pt, a4paper]{article}
+
+% Paquetes
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\geometry{margin=2.54cm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{hanging}
+\usepackage{times}
+\usepackage{fancyhdr}
+
+% Doble espacio (APA 7)
+\doublespacing
+
+% Fuente Times New Roman
+\renewcommand{\rmdefault}{ptm}
+
+% Formato APA 7 para titulos de tablas y figuras
+\captionsetup[table]{labelfont=bf, labelsep=newline, justification=raggedright, singlelinecheck=false}
+\captionsetup[figure]{labelfont=bf, labelsep=newline, justification=raggedright, singlelinecheck=false}
+
+% Numeros de pagina arriba a la derecha
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+\title{\textbf{Determinantes del índice S\&P/BVL Perú General, 2015-2025:\\
+Un análisis del tipo de cambio y el precio del cobre}}
+\author{Torres Condor, Gerald Luis\\
+        Código: 2024200534A\\
+        Facultad de Economía -- UNCP\\
+        \texttt{e\_2024200534A@uncp.edu.pe}}
+\date{Octubre 2026}
+
+\begin{document}
+
+% ============================================
+% PORTADA
+% ============================================
+\begin{titlepage}
+    \centering
+    
+    {\scshape\large UNIVERSIDAD NACIONAL DEL CENTRO DEL PERÚ\par}
+    \vspace{0.3cm}
+    {\scshape\large FACULTAD DE ECONOMÍA\par}
+    \vspace{0.3cm}
+    {\scshape Escuela Profesional de Economía\par}
+    
+    \vspace{1.5cm}
+    
+    \includegraphics[width=0.28\textwidth]{UNCP COS.png}
+    
+    \vspace{1.5cm}
+    
+    {\Large\bfseries Determinantes del índice S\&P/BVL Perú General,\\ 2015-2025:\par}
+    \vspace{0.4cm}
+    {\large\itshape Un análisis del tipo de cambio y el precio del cobre\par}
+    
+    \vspace{1cm}
+    
+    {\large Trabajo de investigación presentado como parte del curso de\\ Finanzas I\par}
+    
+    \vspace{0.5cm}
+    
+    {\large\bfseries Autor:\par}
+    \vspace{0.2cm}
+    {\large Torres Condor, Gerald Luis\par}
+
+    \vspace{0.5cm}
+    
+    {\large\bfseries Docente:\par}
+    \vspace{0.2cm}
+    {\large Dr. Ciro Iván Machacuy Meza\par}
+    
+    \vfill
+    
+    {\large Huancayo, Octubre de 2026\par}
+    
+\end{titlepage}
+
+% ============================================
+% RESUMEN
+% ============================================
+\newpage
+\section*{Resumen}
+\addcontentsline{toc}{section}{Resumen}
+
+\noindent
+Este artículo analiza los determinantes macroeconómicos del Índice General de la Bolsa de Valores de Lima (BVL) durante el periodo 2015-2024, con énfasis en el tipo de cambio y el precio internacional del cobre. El objetivo es estimar la relación entre estas variables, distinguiendo entre su comportamiento de largo plazo y su dinámica de corto plazo. Se construyó una base de datos mensual de 120 observaciones mediante la API REST del Banco Central de Reserva del Perú (serie PN01142MM) y la librería \texttt{yfinance} de Yahoo Finance (tickers PEN=X y HG=F). Se estimaron dos modelos de Mínimos Cuadrados Ordinarios (MCO): uno en niveles y otro en log-diferencias.
+
+Los resultados muestran que el precio del cobre es el determinante más robusto del índice: un aumento del 1\% en el precio del metal se asocia con un incremento de 0.48\% en el retorno mensual (p < 0.001). El tipo de cambio presenta un efecto negativo y significativo ($-0.735$; p = 0.039) una vez controlado el ciclo de los commodities. El modelo en log-diferencias explica el 22.5\% de la variación mensual del índice y descarta autocorrelación (Durbin-Watson = 1.999). Se concluye que el mercado accionario peruano está fuertemente vinculado al ciclo de los commodities y a la estabilidad cambiaria, lo que tiene implicancias para la diversificación de portafolios y la política económica en economías primario-exportadoras.
+
+\vspace{0.5cm}
+\noindent\textbf{Palabras clave:} Bolsa de Valores de Lima, S\&P/BVL, precio del cobre, tipo de cambio, determinantes macroeconómicos.
+% ============================================
+% ABSTRACT
+% ============================================
+\newpage
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+
+\noindent
+This paper analyzes the macroeconomic determinants of the Lima Stock Exchange (BVL) General Index during 2015-2024, focusing on the exchange rate and the international copper price. The objective is to estimate the relationship between these variables, distinguishing between their long-run behavior and their short-run dynamics. A monthly database of 120 observations was built using the Central Reserve Bank of Peru's REST API (series PN01142MM) and the \texttt{yfinance} library from Yahoo Finance (tickers PEN=X and HG=F). Two Ordinary Least Squares (OLS) models were estimated: one in levels and one in log-differences.
+
+Results show that the copper price is the most robust determinant of the index: a 1\% increase in the metal price is associated with a 0.48\% increase in the monthly return (p < 0.001). The exchange rate presents a negative and significant effect ($-0.735$; p = 0.039) once the commodity cycle is controlled for. The log-difference model explains 22.5\% of the monthly variation of the index and rules out autocorrelation (Durbin-Watson = 1.999). It is concluded that the Peruvian stock market is strongly linked to the commodity cycle and exchange rate stability, which has implications for portfolio diversification and economic policy in primary-export economies.
+
+\vspace{0.5cm}
+\noindent\textbf{Keywords:} Lima Stock Exchange, S\&P/BVL, copper price, exchange rate, macroeconomic determinants.
+% ============================================
+% INDICE
+% ============================================
+\newpage
+\tableofcontents
+
+% ============================================
+% INTRODUCCION
+% ============================================
+\newpage
+\section{Introducción}
+
+La Bolsa de Valores de Lima (BVL) es el principal mercado de renta variable del Perú y uno de los más antiguos de América Latina. Su índice general, hoy conocido como S\&P/BVL Perú General, agrupa a las principales empresas listadas y sirve como termómetro del desempeño del mercado accionario peruano. A lo largo de la última década, el índice ha mostrado una alta sensibilidad a factores macroeconómicos, en particular a los precios internacionales de los commodities y al tipo de cambio.
+
+El Perú es una economía pequeña y abierta, con una estructura productiva y exportadora fuertemente dependiente de la minería. El cobre, el oro y el zinc representan una parte significativa de las exportaciones y, por extensión, de las utilidades empresariales y de la recaudación fiscal. Esta dependencia estructural sugiere que el mercado accionario peruano no se mueve únicamente por factores internos, sino que responde a los ciclos de precios de los metales en los mercados internacionales. Al mismo tiempo, la dolarización parcial de la economía peruana hace que el tipo de cambio sea una variable clave para las decisiones de inversión y para la valoración de activos.
+
+A pesar de la relevancia del tema, la literatura empírica sobre los determinantes del índice BVL es relativamente escasa y, en muchos casos, se concentra en periodos anteriores a la pandemia o en metodologías que no distinguen entre relaciones de largo plazo y dinámicas de corto plazo. Esta investigación busca contribuir a llenar ese vacío mediante un análisis actualizado al periodo 2015-2025, con datos mensuales obtenidos directamente de fuentes oficiales.
+
+La pregunta de investigación que guía este trabajo es la siguiente: ¿en qué medida el tipo de cambio y el precio internacional del cobre explican la evolución del Índice General de la Bolsa de Valores de Lima entre 2015 y 2025? A partir de esta pregunta, se plantea como objetivo general estimar la relación entre estas variables macroeconómicas y el índice bursátil peruano, distinguiendo entre el comportamiento en niveles y el comportamiento en retornos mensuales.
+
+El trabajo se justifica por tres razones. Primero, aporta evidencia empírica actualizada sobre un mercado emergente poco estudiado en comparación con otros de la región. Segundo, utiliza una base de datos construida íntegramente por el autor mediante procedimientos automatizados de extracción, lo que garantiza la reproducibilidad de los resultados. Tercero, los hallazgos pueden ser de utilidad para inversionistas, reguladores y responsables de política económica interesados en comprender los canales de transmisión entre el sector externo y el mercado financiero local.
+
+El artículo se organiza de la siguiente manera. La sección 2 presenta el marco teórico. La sección 3 revisa los antecedentes empíricos. La sección 4 describe los materiales y métodos. La sección 5 presenta los resultados. La sección 6 discute los hallazgos en relación con la literatura. Finalmente, la sección 7 presenta las conclusiones.
+
+% ============================================
+% MARCO TEORICO
+% ============================================
+\section{Marco teórico}
+
+El estudio de los determinantes del mercado accionario se apoya en un conjunto de teorías desarrolladas a lo largo del siglo XX y refinadas en las últimas décadas. Este apartado presenta el marco conceptual que sustenta la investigación, organizado en seis subsecciones: la teoría de valoración de activos, la hipótesis de eficiencia de mercados, la relación entre commodities y mercado accionario, la relación entre tipo de cambio y mercado accionario, la evidencia empírica internacional y el contexto institucional del mercado de capitales peruano.
+
+\subsection{Teoría de valoración de activos}
+
+La valoración de activos financieros se sustenta en la idea fundamental de que el precio de una acción refleja el valor presente de los flujos de caja esperados, descontados a una tasa que compensa el riesgo asumido por el inversionista. Esta intuición, presente desde los trabajos clásicos de Williams (1938) y Graham y Dodd (1934), fue formalizada matemáticamente en la segunda mitad del siglo XX.
+
+El Modelo de Valoración de Activos de Capital (CAPM), desarrollado de manera independiente por Sharpe (1964), Lintner (1965) y Mossin (1966), constituye el primer modelo de equilibrio general para la determinación de precios de activos riesgosos. Bajo sus supuestos, el retorno esperado de un activo $i$ se expresa como:
+
+\begin{equation}
+E(R_i) = R_f + \beta_i \left[ E(R_m) - R_f \right]
+\end{equation}
+
+donde $R_f$ es la tasa libre de riesgo, $E(R_m)$ es el retorno esperado del portafolio de mercado y $\beta_i$ mide la sensibilidad del activo a los movimientos del mercado. Bajo este marco, los factores macroeconómicos afectan los precios accionarios por dos canales: modifican la tasa de descuento a través de la tasa libre de riesgo y la prima por riesgo, y alteran los flujos de caja esperados de las empresas.
+
+El modelo de descuento de dividendos de Gordon (1959) ofrece una segunda aproximación complementaria. Según este enfoque, el precio de una acción se determina por la fórmula:
+
+\begin{equation}
+P_0 = \frac{D_1}{r - g}
+\end{equation}
+
+donde $D_1$ es el dividendo esperado del próximo periodo, $r$ es la tasa de rendimiento requerida y $g$ es la tasa de crecimiento esperada de los dividendos. En economías primario-exportadoras como la peruana, los choques en los precios de los commodities afectan directamente las utilidades empresariales y, por ende, los dividendos distribuibles. Esta conexión teórica sugiere que el mercado accionario peruano debería responder a los ciclos de precios internacionales de los metales.
+
+\subsection{Hipótesis de eficiencia de mercados}
+
+Fama (1970) formuló la hipótesis de mercados eficientes, según la cual los precios de los activos reflejan toda la información disponible en el mercado. La eficiencia se clasifica en tres formas según el tipo de información incorporada. En su forma débil, los precios incorporan toda la información histórica, de modo que el análisis técnico no permite obtener retornos anormales. En su forma semifuerte, los precios reflejan toda la información pública, lo que impide obtener ganancias sistemáticas a partir de estados financieros, noticias económicas o anuncios corporativos. En su forma fuerte, los precios incorporan incluso información privada, lo que haría imposible el uso de información privilegiada para obtener rentabilidades extraordinarias.
+
+La hipótesis de eficiencia tiene implicaciones directas para este estudio. Si el mercado peruano fuera eficiente en su forma semifuerte, las variables macroeconómicas públicas ---como el tipo de cambio o el precio del cobre--- no deberían tener poder predictivo sistemático sobre los retornos accionarios. Sin embargo, la evidencia empírica en mercados emergentes sugiere que la eficiencia en su forma débil no siempre se cumple, lo que deja espacio para que variables macroeconómicas tengan capacidad explicativa sobre los retornos.
+
+En el caso peruano, diversos estudios han documentado desviaciones de la eficiencia informativa, especialmente en periodos de alta volatilidad o incertidumbre política. Esta característica del mercado limeño justifica la inclusión de variables macroeconómicas como regresores en modelos explicativos del índice bursátil.
+
+\subsection{Relación entre commodities y mercado accionario}
+
+La literatura sobre mercados emergentes ha identificado tres canales principales por los cuales los precios de los commodities afectan el mercado accionario. El primero es el canal de utilidades: un aumento en el precio del metal eleva los ingresos de las empresas mineras, mejora sus márgenes operativos y aumenta el valor presente de sus flujos futuros. Dado que las empresas mineras representan una fracción significativa de la capitalización bursátil y del volumen negociado en la Bolsa de Valores de Lima, este canal tiene una relevancia particular en el caso peruano.
+
+El segundo es el canal fiscal. Los mayores precios de exportación incrementan la recaudación tributaria del gobierno a través del impuesto a la renta y de las regalías mineras. Esto mejora las cuentas fiscales, reduce el déficit público y, en consecuencia, disminuye el riesgo país percibido por los inversionistas. Un menor riesgo país se traduce en una menor prima por riesgo exigida a los activos peruanos y, por lo tanto, en precios accionarios más altos.
+
+El tercero es el canal de expectativas. Los inversionistas interpretan los precios altos de los commodities como señal de un ciclo económico favorable. Esta lectura optimista estimula la demanda por activos de riesgo, incluyendo las acciones, y puede generar un círculo virtuoso de valorización. Inversamente, caídas pronunciadas en los precios de los metales suelen desencadenar ventas masivas y correcciones en el mercado.
+
+Dada la composición sectorial de la Bolsa de Valores de Lima, se espera que el canal de utilidades domine sobre los demás. Esto sustenta la hipótesis central de este trabajo: existe una relación positiva entre el precio internacional del cobre y el índice general de la BVL.
+
+\subsection{Tipo de cambio y mercado accionario}
+
+La relación entre el tipo de cambio y el mercado accionario ha sido analizada desde dos perspectivas teóricas contrapuestas. El modelo de flujos, propuesto por Dornbusch y Fischer (1980), sostiene que una depreciación de la moneda doméstica mejora la competitividad de las exportaciones, aumenta los ingresos de las empresas exportadoras y eleva el precio de sus acciones. Bajo esta lógica, existe una relación negativa entre el tipo de cambio (medido como unidades de moneda local por unidad de moneda extranjera) y el índice accionario: cuando el sol se aprecia, las exportadoras pierden competitividad y sus acciones caen.
+
+El modelo de balance, desarrollado por Krugman (2000) a partir de la experiencia de las crisis financieras asiáticas y latinoamericanas, plantea lo contrario. Una depreciación encarece los pasivos denominados en moneda extranjera, deteriora los balances empresariales y reduce el valor de las acciones. Bajo esta lógica, existe una relación positiva entre el tipo de cambio y el índice accionario: cuando el sol se deprecia, las empresas con deuda en dólares enfrentan mayores costos financieros y sus acciones caen.
+
+En economías parcialmente dolarizadas como la peruana, ambos canales operan simultáneamente. El efecto neto sobre el índice bursátil depende de tres factores: la composición sectorial del mercado, el grado de cobertura cambiaria de las empresas listadas y el nivel de pasivos en dólares del sector corporativo. Esta ambigüedad teórica se refleja en la evidencia empírica mixta que se revisa en la siguiente sección.
+
+\subsection{Evidencia empírica internacional}
+
+La literatura internacional ha documentado patrones heterogéneos en la relación entre variables macroeconómicas y mercados accionarios, dependiendo del nivel de desarrollo de la economía y de su estructura productiva. En economías avanzadas, la relación entre tipo de cambio y mercado accionario tiende a ser débil o inestable, mientras que en economías emergentes la relación suele ser más pronunciada debido a la mayor exposición a choques externos.
+
+En América Latina, diversos estudios han encontrado que los precios de los commodities explican una fracción significativa de la variación de los índices bursátiles. Para el caso chileno, la alta dependencia del cobre ha llevado a que el mercado accionario local responda con fuerza a los movimientos del metal. Para el caso colombiano, la dependencia del petróleo genera patrones similares con el crudo. Para el caso mexicano, la integración con la economía estadounidense hace que las tasas de interés de la Reserva Federal tengan un rol más relevante que los precios de los commodities.
+
+La evidencia comparada sugiere que el grado de apertura comercial, la composición sectorial del mercado accionario y el régimen cambiario son los principales determinantes de la sensibilidad del índice bursátil a los factores macroeconómicos. Estos hallazgos son consistentes con la hipótesis de que el mercado accionario peruano, dada su estructura primario-exportadora, debería mostrar una dependencia significativa de los precios de los metales y una respuesta no trivial al tipo de cambio.
+
+\subsection{El mercado de capitales peruano: contexto institucional}
+
+La Bolsa de Valores de Lima (BVL) fue fundada en 1860 y es uno de los mercados bursátiles más antiguos de América Latina. A lo largo de su historia, ha atravesado periodos de auge y crisis, reflejando las vicisitudes de la economía peruana. En las últimas tres décadas, la BVL ha experimentado un proceso de modernización institucional, impulsado por reformas regulatorias, la apertura de la cuenta de capitales y la integración con los mercados internacionales.
+
+El Índice General de la BVL, hoy conocido como S\&P/BVL Perú General, es el principal indicador del mercado accionario peruano. Agrupa a las empresas listadas con mayor capitalización bursátil y volumen de negociación, y su composición sectorial está dominada por los sectores minero, financiero y de servicios públicos. Esta concentración sectorial explica en parte la alta sensibilidad del índice a los precios internacionales de los metales.
+
+El mercado accionario peruano se caracteriza por su reducida profundidad relativa en comparación con otros mercados de la región. La capitalización bursátil como porcentaje del PBI es inferior a la de Chile, Colombia o México, y el número de empresas listadas es limitado. Esta característica estructural implica que el índice está dominado por un número reducido de emisores de gran tamaño, lo que amplifica el efecto de los choques sectoriales sobre el comportamiento agregado del mercado.
+
+En cuanto a la regulación, la Superintendencia del Mercado de Valores (SMV) es la entidad encargada de supervisar el mercado de capitales peruano. La Ley del Mercado de Valores, promulgada en 1996 y modificada en múltiples ocasiones, establece el marco normativo bajo el cual operan los emisores, intermediarios e inversionistas. La integración con el Mercado Integrado Latinoamericano (MILA) ha sido uno de los hitos más relevantes de las últimas décadas, aunque su impacto sobre la liquidez del mercado local ha sido limitado.
+
+Este contexto institucional es relevante para interpretar los resultados del estudio. La estructura del mercado, dominada por empresas mineras y financieras, sugiere que los determinantes macroeconómicos del índice reflejan en buena medida los determinantes de esos sectores específicos. En particular, el precio del cobre y el tipo de cambio son variables críticas para la rentabilidad y el valor de las empresas mineras exportadoras, que representan una fracción significativa del índice.
+
+% ============================================
+% ANTECEDENTES
+% ============================================
+\section{Antecedentes o desarrollo}
+
+La relación entre variables macroeconómicas y mercados accionarios ha sido ampliamente estudiada en la literatura financiera internacional. En el caso peruano, los trabajos se han concentrado en tres líneas: el efecto de los precios de los commodities, el rol del tipo de cambio y la influencia de la política monetaria.
+
+\subsection{Precios de commodities y mercado accionario}
+
+Diversos estudios han documentado una relación positiva entre los precios internacionales de los metales y el desempeño de la BVL. Bendezú Jiménez y Camacho Gadea (2025) analizaron el impacto de las variaciones diarias de los precios del cobre, oro y zinc sobre el retorno y la volatilidad del Índice S\&P/BVL Perú General entre 2010 y 2019, encontrando una relación directa y estadísticamente significativa. En la misma línea, Zevallos y Del Carpio (2015) mostraron que las volatilidades de las acciones mineras peruanas imitan el comportamiento de las volatilidades de los metales, lo que refleja la alta concentración del mercado limeño en el sector extractivo.
+
+A nivel regional, Johnson (2009) encontró que los mercados bursátiles de Argentina, Brasil y Perú se ven significativamente afectados por cambios en los precios de los commodities el mismo día, lo que sugiere una integración financiera vinculada al ciclo de materias primas. Estudios más recientes, como el de Abbara et al. (2014), utilizaron metodologías de riesgo condicional (CoVaR) para estimar el riesgo del mercado peruano en función de los precios de los metales y de índices internacionales, confirmando la dependencia externa del mercado local.
+
+\subsection{Tipo de cambio y mercado accionario}
+
+El efecto del tipo de cambio sobre el mercado accionario peruano es menos concluyente. Alanya y Rodríguez (2018) modelaron la volatilidad estocástica conjunta del mercado bursátil y del tipo de cambio, encontrando patrones similares en ambas series y evidencia de dependencia entre ellas. Por su parte, Chambi Condori (2020) confirmó una incidencia positiva del tipo de cambio sobre los retornos de la BVL, aunque con un efecto menor en comparación con el crecimiento del PBI.
+
+La dolarización parcial de la economía peruana introduce un canal adicional: las empresas exportadoras se benefician de una depreciación del sol, mientras que las empresas con pasivos en dólares se perjudican. El efecto neto sobre el índice depende de la composición sectorial del mercado y del grado de cobertura cambiaria de las empresas listadas.
+
+\subsection{Política monetaria y mercado accionario}
+
+La literatura también ha explorado el rol de la política monetaria. Vilca Mamani (2026) analizó los efectos de los choques de política fiscal y monetaria sobre el desempeño de la BVL entre 2003 y 2023, encontrando un impacto negativo ante aumentos de la tasa de referencia. Rodríguez Abraham (2024) confirmó esta relación para el periodo 2012-2023, estimando que un aumento de 1\% en la tasa de interés genera un incremento del 0.277\% en los retornos del mercado, resultado que sugiere una respuesta no lineal de los inversionistas ante cambios en las condiciones monetarias.
+
+\subsection{Estudios de eficiencia y riesgo}
+
+Finalmente, algunos trabajos han abordado la eficiencia informativa y el riesgo del mercado peruano. Lahura y Vega (2017) encontraron que los shocks del mercado de valores han tenido un efecto causal de corto plazo en el PBI real per cápita solo después de 1991, lo que sugiere un cambio estructural en la relación entre el mercado financiero y la economía real. Estudios más recientes, como el del BCRP (2023), han analizado la eficiencia del mercado en su forma débil, mientras que otros trabajos han estimado el Valor en Riesgo (VaR) del índice utilizando retornos intradía.
+
+En conjunto, la literatura sugiere que el mercado accionario peruano está determinado por una combinación de factores externos (precios de commodities, condiciones financieras globales) y factores internos (política monetaria, ciclo económico, tipo de cambio). Sin embargo, la evidencia para el periodo posterior a la pandemia es limitada, lo que justifica la presente investigación.
+
+% ============================================
+% MATERIALES Y METODOS
+% ============================================
+\section{Materiales y métodos}
+
+\subsection{Fuentes de datos}
+
+La base de datos del estudio es de frecuencia mensual y cubre el periodo comprendido entre enero de 2015 y diciembre de 2024, totalizando 120 observaciones. Se construyó a partir de dos fuentes oficiales. La primera es el Banco Central de Reserva del Perú (BCRP), del cual se obtuvo el Índice General de la Bolsa de Valores de Lima a través de la serie estadística PN01142MM, publicada en su portal de series. La segunda es Yahoo Finance, del cual se obtuvieron el tipo de cambio sol por dólar estadounidense (ticker PEN=X) y el precio internacional del cobre (ticker HG=F) mediante la librería \texttt{yfinance} de Python.
+
+La elección de estas fuentes responde a tres criterios. Primero, ambas son de acceso libre y no requieren autenticación, lo que facilita la reproducibilidad del estudio. Segundo, ofrecen series históricas suficientemente largas para el periodo de análisis. Tercero, son fuentes ampliamente utilizadas en la literatura empírica sobre mercados emergentes, lo que permite comparar los resultados con estudios previos. El cuadro \ref{tab:variables} resume las variables utilizadas.
+
+\begin{table}[H]
+\centering
+\caption{Variables del estudio}
+\label{tab:variables}
+\begin{tabular}{llll}
+\toprule
+Variable & Unidad & Frecuencia original & Fuente \\
+\midrule
+Índice BVL & Puntos & Mensual & BCRP (PN01142MM) \\
+Tipo de cambio & S/ por US\$ & Diaria & Yahoo Finance (PEN=X) \\
+Precio del cobre & US\$/lb & Diaria & Yahoo Finance (HG=F) \\
+\bottomrule
+\multicolumn{4}{l}{\footnotesize Nota: Elaboración propia.} \\
+\end{tabular}
+\end{table}
+
+\subsection{Procedimiento de extracción}
+
+Los datos fueron extraídos mediante procedimientos automatizados de programación, en cumplimiento de los requisitos de reproducibilidad establecidos en la consigna del curso. Se elaboraron cuatro scripts en Python. El primero, \texttt{01\_extraccion\_api.py}, consume la API REST del BCRP y la librería \texttt{yfinance}. El segundo, \texttt{02\_scraping\_web.py}, implementa el raspado web de portales institucionales. El tercero, \texttt{03\_limpieza\_datos.py}, unifica las fuentes por la llave común de fecha mensual y genera el archivo procesado. El cuarto, \texttt{04\_analisis.py}, produce las tablas y figuras del artículo.
+
+El índice BVL se obtuvo directamente del BCRP en frecuencia mensual, con la serie expresada en puntos y base 31 de diciembre de 1991 igual a 100. Las series diarias de Yahoo Finance se agregaron a frecuencia mensual mediante el promedio aritmético de las observaciones de cada mes. La unión de las fuentes se realizó por la llave común \texttt{fecha}, construida como el primer día de cada mes en formato ISO. Los valores faltantes se trataron mediante eliminación por lista, dado que representan menos del 1\% de las observaciones totales.
+
+El archivo procesado final contiene 120 observaciones mensuales y cuatro columnas: fecha, índice BVL, tipo de cambio y precio del cobre. Se calculó un hash SHA-256 del archivo para garantizar la integridad de los datos: \texttt{97e88c8ce2c6b21db547f6f141dc9ae96eafa9edd934eb05f2efc1a43c4f21c1}. El código fuente completo, los datos crudos y procesados, y los scripts de análisis se encuentran disponibles en el repositorio del proyecto.
+
+\subsection{Estrategia econométrica}
+
+Se estimaron dos modelos de Mínimos Cuadrados Ordinarios (MCO), con el objetivo de capturar tanto la relación de largo plazo como la dinámica de corto plazo entre las variables. El primer modelo, en niveles, relaciona el índice BVL con el tipo de cambio y el precio del cobre:
+
+\begin{equation}
+\text{indice\_bvl}_t = \beta_0 + \beta_1 \text{tipo\_cambio}_t + \beta_2 \text{precio\_cobre}_t + \varepsilon_t
+\end{equation}
+
+El segundo modelo, en log-diferencias, se estima sobre los retornos mensuales de cada variable:
+
+\begin{equation}
+\Delta \ln(\text{indice\_bvl})_t = \gamma_0 + \gamma_1 \Delta \ln(\text{tipo\_cambio})_t + \gamma_2 \Delta \ln(\text{precio\_cobre})_t + u_t
+\end{equation}
+
+La elección de MCO se justifica por tres razones. Primero, el tamaño de la muestra (120 observaciones mensuales) es adecuado para este tipo de estimación. Segundo, el objetivo del estudio es exploratorio y busca cuantificar relaciones de asociación, no establecer causalidad. Tercero, el modelo en log-diferencias elimina la tendencia común de las series y permite interpretar los coeficientes como elasticidades de corto plazo. Se reconoce como limitación la posible endogeneidad entre las variables y la omisión de regresores relevantes como la tasa de referencia o el riesgo país, lo que se aborda en la sección de discusión.
+
+% ============================================
+% RESULTADOS
+% ============================================
+\section{Resultados}
+
+\subsection{Estadísticas descriptivas}
+
+El cuadro \ref{tab:desc} presenta los estadísticos descriptivos de las tres variables del estudio para el periodo 2015-2024. El índice BVL presenta una media de 19\,387 puntos, con un mínimo de 9\,392 puntos (alcanzado en enero de 2016) y un máximo de 30\,470 puntos (en octubre de 2024). El tipo de cambio promedio fue de 3.49 soles por dólar, con una desviación estándar de 0.26, reflejando la relativa estabilidad cambiaria del periodo. El precio del cobre promedió 3.23 dólares por libra, con un rango que va de 2.01 a 4.78 dólares.
+
+\begin{table}[H]
+\centering
+\caption{Estadísticos descriptivos, 2015-2024}
+\label{tab:desc}
+\begin{tabular}{lrrrrr}
+\toprule
+Variable & Media & Desv.Est. & Mín & Máx \\
+\midrule
+Índice BVL & 19\,387.38 & 4\,798.16 & 9\,391.84 & 30\,470.47 \\
+Tipo de cambio & 3.489 & 0.265 & 2.966 & 4.077 \\
+Precio del cobre & 3.228 & 0.777 & 2.009 & 4.775 \\
+\bottomrule
+\multicolumn{5}{l}{\footnotesize Nota: Elaboración propia con datos del BCRP y Yahoo Finance.} \\
+\end{tabular}
+\end{table}
+
+La figura \ref{fig:series} muestra la evolución de las tres series en el tiempo. Se observa una tendencia creciente del índice BVL, con una caída pronunciada en 2020 coincidiendo con la pandemia de COVID-19, y una recuperación posterior. El tipo de cambio muestra una depreciación gradual del sol, especialmente entre 2020 y 2021. El precio del cobre presenta un ciclo marcado, con un máximo en 2021 y una corrección posterior.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{fig_series_tiempo.png}
+\caption{Evolución del índice BVL, tipo de cambio y precio del cobre, 2015-2024}
+\label{fig:series}
+\end{figure}
+
+\subsection{Análisis de correlaciones}
+
+El cuadro \ref{tab:corr} presenta la matriz de correlaciones. El índice BVL muestra una correlación positiva fuerte con el precio del cobre (0.765) y una correlación positiva moderada con el tipo de cambio (0.571). El tipo de cambio y el precio del cobre también están correlacionados positivamente (0.819), lo que refleja la relación entre la depreciación del sol y el ciclo de los commodities.
+
+\begin{table}[H]
+\centering
+\caption{Matriz de correlaciones}
+\label{tab:corr}
+\begin{tabular}{lrrr}
+\toprule
+ & Índice BVL & Tipo de cambio & Precio cobre \\
+\midrule
+Índice BVL & 1.000 & 0.571 & 0.765 \\
+Tipo de cambio & 0.571 & 1.000 & 0.819 \\
+Precio del cobre & 0.765 & 0.819 & 1.000 \\
+\bottomrule
+\multicolumn{4}{l}{\footnotesize Nota: Elaboración propia.} \\
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{fig_correlacion.png}
+\caption{Mapa de calor de correlaciones}
+\label{fig:corr}
+\end{figure}
+
+La figura \ref{fig:disp} muestra los diagramas de dispersión del índice BVL frente a cada variable. La relación con el precio del cobre es claramente lineal y positiva. La relación con el tipo de cambio es menos nítida y sugiere que otras variables podrían estar mediando el efecto.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{fig_dispersion.png}
+\caption{Diagramas de dispersión del índice BVL}
+\label{fig:disp}
+\end{figure}
+
+\subsection{Modelos de regresión}
+
+El cuadro \ref{tab:reg} presenta los resultados de los dos modelos estimados por MCO. En el modelo en niveles, el precio del cobre resulta significativo al 1\% con un coeficiente de 5\,577.17, mientras que el tipo de cambio no es significativo al 5\% (p = 0.102). El R$^2$ del modelo es 0.594.
+
+En el modelo en log-diferencias, ambos regresores resultan significativos. El precio del cobre tiene un coeficiente de 0.481 (p < 0.001), lo que indica que un aumento del 1\% en el precio del cobre se asocia con un incremento del 0.48\% en el índice BVL. El tipo de cambio tiene un coeficiente de $-0.735$ (p = 0.039), lo que sugiere que una depreciación del 1\% del sol reduce el índice en 0.73\%. El R$^2$ del modelo es 0.225 y el estadístico Durbin-Watson es 1.999, cercano a 2, lo que descarta autocorrelación de primer orden.
+
+\begin{table}[H]
+\centering
+\caption{Resultados de las regresiones MCO}
+\label{tab:reg}
+\begin{tabular}{lcc}
+\toprule
+ & Modelo en niveles & Modelo en log-diferencias \\
+\midrule
+Constante & 12\,080.00** & 0.0059 \\
+          & (4\,965.22)  & (0.005) \\
+Tipo de cambio & $-3\,065.48$ & $-0.735$** \\
+               & (1\,861.12)  & (0.352) \\
+Precio del cobre & 5\,577.17*** & 0.481*** \\
+                 & (633.84)     & (0.102) \\
+\midrule
+Observaciones & 120 & 119 \\
+R$^2$ & 0.594 & 0.225 \\
+R$^2$ ajustado & 0.588 & 0.212 \\
+Durbin-Watson & 0.121 & 1.999 \\
+\bottomrule
+\multicolumn{3}{l}{\footnotesize Nota: *** p < 0.01, ** p < 0.05, * p < 0.1.} \\
+\multicolumn{3}{l}{\footnotesize Errores estándar entre paréntesis.} \\
+\end{tabular}
+\end{table}
+
+% ============================================
+% DISCUSION
+% ============================================
+\section{Discusión}
+
+Los resultados confirman la hipótesis central de este trabajo: el precio internacional del cobre es el determinante más robusto del Índice General de la Bolsa de Valores de Lima durante el periodo 2015-2024. Este hallazgo es consistente con la evidencia previa de Bendezú Jiménez y Camacho Gadea (2025) y de Zevallos y Del Carpio (2015), quienes documentaron la alta sensibilidad del mercado limeño a los precios de los metales. La magnitud del efecto es relevante: en el modelo en log-diferencias, un aumento del 1\% en el precio del cobre se asocia con un incremento de 0.48\% en el retorno mensual del índice.
+
+El efecto del tipo de cambio es más matizado. En el modelo en niveles, la variable no resulta significativa al 5\%, lo que sugiere que su influencia está mediada por la tendencia común de las series. Sin embargo, en el modelo en log-diferencias, que elimina esa tendencia, el coeficiente resulta negativo y significativo ($-0.735$). Esto indica que, una vez controlado el ciclo de los commodities, una depreciación del sol tiende a reducir los retornos del mercado accionario. Este hallazgo difiere parcialmente de Chambi Condori (2020), quien reportó un efecto positivo del tipo de cambio sobre los retornos de la BVL, pero es coherente con la literatura que señala que la depreciación encarece los pasivos en dólares de las empresas no exportadoras.
+
+La correlación positiva de 0.819 entre el tipo de cambio y el precio del cobre es un hallazgo relevante. Refleja que ambos responden a un mismo ciclo externo: cuando los términos de intercambio mejoran, el sol se aprecia y los metales suben. Esta colinealidad entre regresores explica por qué el tipo de cambio pierde significancia en el modelo en niveles: parte de su efecto es absorbido por el precio del cobre.
+
+El ajuste del modelo en niveles ($R^2 = 0.594$) es considerablemente mayor que el del modelo en log-diferencias ($R^2 = 0.225$). Esto no debe interpretarse como una superioridad del primero. En series con tendencia común, como es el caso del índice BVL, el tipo de cambio y el precio del cobre, el $R^2$ en niveles sobreestima la capacidad explicativa del modelo. El modelo en log-diferencias, al trabajar con retornos, ofrece una medida más honesta de la relación de corto plazo.
+
+Desde el punto de vista de política económica, los resultados sugieren que la estabilidad cambiaria y un entorno favorable de precios de commodities son condiciones necesarias para el buen desempeño del mercado accionario peruano. En un contexto de alta dependencia de la minería, la diversificación productiva y la profundización del mercado de capitales doméstico podrían reducir la vulnerabilidad del índice a los ciclos externos.
+
+Entre las limitaciones del estudio se reconoce el tamaño de la muestra (120 observaciones mensuales), la omisión de variables como la tasa de referencia o el riesgo país, y el uso de MCO sin corrección por endogeneidad. Trabajos futuros podrían incorporar modelos de vectores autorregresivos (VAR), análisis de cointegración o modelos GARCH para capturar la dinámica de la volatilidad.
+
+% ============================================
+% CONCLUSIONES
+% ============================================
+\section{Conclusiones}
+
+Este trabajo analizó los determinantes macroeconómicos del Índice General de la Bolsa de Valores de Lima entre 2015 y 2024, con énfasis en el tipo de cambio y el precio internacional del cobre. A partir de una base de datos mensual de 120 observaciones construida íntegramente mediante procedimientos automatizados de extracción, se estimaron dos modelos de regresión por Mínimos Cuadrados Ordinarios.
+
+Los resultados permiten extraer tres conclusiones principales. Primero, el precio internacional del cobre es el determinante más robusto del índice bursátil peruano: su coeficiente es positivo y significativo en ambos modelos, y en el modelo en log-diferencias indica que un aumento del 1\% en el precio del metal se asocia con un incremento de 0.48\% en el retorno mensual del índice. Segundo, el tipo de cambio tiene un efecto negativo sobre los retornos del mercado accionario cuando se controla por el ciclo de los commodities: una depreciación del 1\% del sol reduce el retorno mensual en 0.73\%. Tercero, la correlación de 0.819 entre el tipo de cambio y el precio del cobre revela que ambas variables responden a un mismo ciclo externo, lo que dificulta aislar sus efectos individuales en un modelo lineal simple.
+
+En conjunto, la evidencia sugiere que el mercado accionario peruano está fuertemente vinculado al ciclo de los commodities y a la estabilidad cambiaria. Esta dependencia estructural refleja el carácter primario-exportador de la economía peruana y sugiere que la diversificación productiva y el desarrollo del mercado de capitales doméstico son condiciones necesarias para reducir la vulnerabilidad del índice ante choques externos.
+
+El trabajo contribuye a la literatura empírica sobre el mercado accionario peruano con evidencia actualizada al periodo posterior a la pandemia y con una base de datos reproducible, construida mediante API y librerías de código abierto. Como limitaciones, se reconoce el tamaño de la muestra, la omisión de variables relevantes como la tasa de referencia y el riesgo país, y la ausencia de correcciones por endogeneidad. Trabajos futuros podrían extender el análisis con modelos VAR, de cointegración o GARCH multivariados.
+
+% ============================================
+% REFERENCIAS
+% ============================================
+\newpage
+\section*{Referencias}
+\addcontentsline{toc}{section}{Referencias}
+
+\begin{hangparas}{0.5in}{1}
+
+Abbara, O., Del Carpio, C., Villarreal, F., \& Zevallos, M. (2014). \textit{The effects of metal commodity prices and international stock markets on the Peruvian stock market risk} (Documento de Trabajo N.º 2014-12). Banco Central de Reserva del Perú.
+
+Alanya, W., \& Rodríguez, G. (2018). Stochastic volatility in the Peruvian stock market and exchange rate returns: A Bayesian approximation. \textit{Journal of Emerging Market Finance, 17}(3), 1-28.
+
+Banco Central de Reserva del Perú. (2023). \textit{Estadísticas de la Bolsa de Valores de Lima}. https://estadisticas.bcrp.gob.pe
+
+Bendezú Jiménez, H. J., \& Camacho Gadea, M. J. (2025). Impacto de la variación del precio de los commodities sobre el mercado de valores peruano (2010-2019). \textit{Revista de Economía del Rosario, 27}(2), 1-24.
+
+Chambi Condori, P. P. (2020). El impacto de las variables macroeconómicas en la rentabilidad de la Bolsa de Valores de Lima. \textit{Quipukamayoc, 28}(56), 51-57.
+
+Dornbusch, R., \& Fischer, S. (1980). Exchange rates and the current account. \textit{American Economic Review, 70}(5), 960-971.
+
+Fama, E. F. (1970). Efficient capital markets: A review of theory and empirical work. \textit{The Journal of Finance, 25}(2), 383-417.
+
+Gordon, M. J. (1959). Dividends, earnings, and stock prices. \textit{The Review of Economics and Statistics, 41}(2), 99-105.
+
+Graham, B., \& Dodd, D. L. (1934). \textit{Security analysis}. McGraw-Hill.
+
+Johnson, R. (2009). Commodity prices and stock market behavior in South American countries in the short run. \textit{Emerging Markets Finance and Trade, 45}(4), 69-82.
+
+Krugman, P. (2000). \textit{Balance sheets, the transfer problem, and financial crises}. MIT Press.
+
+Lahura, E., \& Vega, M. (2017). Stock market development and real economic activity in Peru. \textit{Empirical Economics, 53}(4), 1481-1506.
+
+Lintner, J. (1965). The valuation of risk assets and the selection of risky investments in stock portfolios and capital budgets. \textit{The Review of Economics and Statistics, 47}(1), 13-37.
+
+Mossin, J. (1966). Equilibrium in a capital asset market. \textit{Econometrica, 34}(4), 768-783.
+
+Rodríguez Abraham, A. R. (2024). \textit{Effects of inflation-targeting monetary policy on stock market returns} (Documento de Trabajo). Ideas RePEc.
+
+Sharpe, W. F. (1964). Capital asset prices: A theory of market equilibrium under conditions of risk. \textit{The Journal of Finance, 19}(3), 425-442.
+
+Superintendencia del Mercado de Valores. (2024). \textit{Memoria institucional 2023}. https://www.smv.gob.pe
+
+Vilca Mamani, G. C. (2026). Efectos de los choques de política fiscal y monetaria sobre el desempeño de la Bolsa de Valores de Lima. \textit{Semestre Económico, 15}(1), 96-110.
+
+Williams, J. B. (1938). \textit{The theory of investment value}. Harvard University Press.
+
+Zevallos, M., \& Del Carpio, C. (2015). Metal returns, stock returns and stock market volatility. \textit{Economía, 38}(75), 101-122.
+
+\end{hangparas}
+
+% ============================================
+% ANEXO
+% ============================================
+\newpage
+\section*{Anexo: datos y código}
+\addcontentsline{toc}{section}{Anexo}
+
+\subsection*{Repositorio del proyecto}
+
+El código fuente completo, los datos crudos, los datos procesados y las salidas del análisis se encuentran disponibles en el siguiente repositorio:
+
+\vspace{0.3cm}
+\noindent
+\textbf{GitHub:} \url{https://github.com/GeraldT947/finanzas-i-2024200534A}
+
+\subsection*{Endpoints utilizados}
+
+\begin{itemize}
+    \item \textbf{BCRP (Índice General BVL):} \url{https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PN01142MM/json/2015-1/2024-12}
+    \item \textbf{Yahoo Finance (tipo de cambio):} ticker \texttt{PEN=X}
+    \item \textbf{Yahoo Finance (precio del cobre):} ticker \texttt{HG=F}
+\end{itemize}
+
+\subsection*{Diccionario de variables}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lllll}
+\toprule
+Variable & Definición & Unidad & Frecuencia & Fuente \\
+\midrule
+fecha & Primer día del mes & -- & Mensual & -- \\
+indice\_bvl & Índice S\&P/BVL Perú General & Puntos & Mensual & BCRP \\
+tipo\_cambio & Tipo de cambio SBS & S/ por US\$ & Mensual & Yahoo Finance \\
+precio\_cobre & Cotización del cobre & US\$/lb & Mensual & Yahoo Finance \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Fecha de corte y hash}
+
+\noindent
+\textbf{Fecha de corte:} 31 de diciembre de 2024.\\
+\noindent
+\textbf{Hash SHA-256 del archivo procesado:} \texttt{97e88c8ce2c6b21db547f6f141dc9ae96eafa9edd934eb05f2efc1a43c4f21c1}
+
+\end{document}
