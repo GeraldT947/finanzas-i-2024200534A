@@ -3,8 +3,8 @@
 Dep. Variable:             indice_bvl   R-squared:                       0.225
 Model:                            OLS   Adj. R-squared:                  0.212
 Method:                 Least Squares   F-statistic:                     16.87
-Date:                Fri, 25 Sep 2026   Prob (F-statistic):           3.70e-07
-Time:                        03:55:11   Log-Likelihood:                 184.48
+Date:                Mon, 28 Sep 2026   Prob (F-statistic):           3.70e-07
+Time:                        21:07:19   Log-Likelihood:                 184.48
 No. Observations:                 119   AIC:                            -363.0
 Df Residuals:                     116   BIC:                            -354.6
 Df Model:                           2                                         

@@ -26,3 +26,63 @@
 2026-09-25 03:55:11,854 - INFO - Regresiones guardadas
 2026-09-25 03:55:12,303 - INFO - Graficos de dispersion guardados
 2026-09-25 03:55:12,304 - INFO - === FIN ANALISIS ===
+2026-09-28 20:56:32,924 - INFO - ========== INICIO ==========
+2026-09-28 20:56:33,113 - INFO - BCRP: indice_general_bvl (PN01142MM)
+2026-09-28 20:56:33,632 - INFO - HTTP 200 para indice_general_bvl
+2026-09-28 20:56:33,978 - INFO - Guardado: ../datos_crudos/bcrp_indice_general_bvl_2024200534A.csv (120 filas)
+2026-09-28 20:56:33,978 - INFO - Yahoo: tipo_cambio (PEN=X)
+2026-09-28 20:56:34,720 - INFO - Guardado: ../datos_crudos/yahoo_tipo_cambio_2024200534A.csv (2605 filas)
+2026-09-28 20:56:34,720 - INFO - Yahoo: precio_cobre (HG=F)
+2026-09-28 20:56:35,184 - INFO - Guardado: ../datos_crudos/yahoo_precio_cobre_2024200534A.csv (2513 filas)
+2026-09-28 20:56:35,185 - INFO - Duracion: 0:00:02.071487
+2026-09-28 20:56:35,185 - INFO - ========== FIN ==========
+2026-09-28 20:59:07,843 - INFO - ========== INICIO ==========
+2026-09-28 20:59:07,844 - INFO - BCRP: indice_general_bvl (PN01142MM)
+2026-09-28 20:59:08,378 - INFO - HTTP 200 para indice_general_bvl
+2026-09-28 20:59:08,389 - INFO - Guardado: ../datos_crudos/bcrp_indice_general_bvl_2024200534A.csv (120 filas)
+2026-09-28 20:59:08,390 - INFO - BCRP: tasa_referencia (PD12301MD)
+2026-09-28 20:59:09,294 - INFO - HTTP 200 para tasa_referencia
+2026-09-28 20:59:09,315 - INFO - Guardado: ../datos_crudos/bcrp_tasa_referencia_2024200534A.csv (0 filas)
+2026-09-28 20:59:09,316 - INFO - BCRP: ipc (PN01273PM)
+2026-09-28 20:59:09,739 - INFO - HTTP 200 para ipc
+2026-09-28 20:59:09,750 - INFO - Guardado: ../datos_crudos/bcrp_ipc_2024200534A.csv (120 filas)
+2026-09-28 20:59:09,751 - INFO - Yahoo: tipo_cambio (PEN=X)
+2026-09-28 20:59:10,225 - INFO - Guardado: ../datos_crudos/yahoo_tipo_cambio_2024200534A.csv (2605 filas)
+2026-09-28 20:59:10,226 - INFO - Yahoo: precio_cobre (HG=F)
+2026-09-28 20:59:10,607 - INFO - Guardado: ../datos_crudos/yahoo_precio_cobre_2024200534A.csv (2513 filas)
+2026-09-28 20:59:10,607 - INFO - Duracion: 0:00:02.763282
+2026-09-28 20:59:10,608 - INFO - ========== FIN ==========
+2026-09-28 21:03:43,623 - INFO - ========== INICIO ==========
+2026-09-28 21:03:43,624 - INFO - BCRP: indice_general_bvl (PN01142MM)
+2026-09-28 21:03:44,140 - INFO - HTTP 200 para indice_general_bvl
+2026-09-28 21:03:44,150 - INFO - Guardado: ../datos_crudos/bcrp_indice_general_bvl_2024200534A.csv (120 filas)
+2026-09-28 21:03:44,151 - INFO - BCRP: tasa_referencia (PD04722MM)
+2026-09-28 21:03:44,675 - INFO - HTTP 200 para tasa_referencia
+2026-09-28 21:03:44,691 - INFO - Guardado: ../datos_crudos/bcrp_tasa_referencia_2024200534A.csv (120 filas)
+2026-09-28 21:03:44,691 - INFO - BCRP: ipc (PN01273PM)
+2026-09-28 21:03:45,075 - INFO - HTTP 200 para ipc
+2026-09-28 21:03:45,083 - INFO - Guardado: ../datos_crudos/bcrp_ipc_2024200534A.csv (120 filas)
+2026-09-28 21:03:45,084 - INFO - Yahoo: tipo_cambio (PEN=X)
+2026-09-28 21:03:45,373 - INFO - Guardado: ../datos_crudos/yahoo_tipo_cambio_2024200534A.csv (2605 filas)
+2026-09-28 21:03:45,374 - INFO - Yahoo: precio_cobre (HG=F)
+2026-09-28 21:03:45,558 - INFO - Guardado: ../datos_crudos/yahoo_precio_cobre_2024200534A.csv (2513 filas)
+2026-09-28 21:03:45,559 - INFO - Duracion: 0:00:01.934419
+2026-09-28 21:03:45,559 - INFO - ========== FIN ==========
+2026-09-28 21:05:41,279 - INFO - === INICIO LIMPIEZA ===
+2026-09-28 21:05:41,289 - INFO - indice_general_bvl cargado: 120 filas
+2026-09-28 21:05:41,295 - INFO - tasa_referencia cargado: 120 filas
+2026-09-28 21:05:41,302 - INFO - ipc cargado: 120 filas
+2026-09-28 21:05:41,325 - INFO - tipo_cambio agregado a mensual: 120 filas
+2026-09-28 21:05:41,338 - INFO - precio_cobre agregado a mensual: 120 filas
+2026-09-28 21:05:41,352 - INFO - Dataset unificado: 120 filas, 6 columnas
+2026-09-28 21:05:41,353 - INFO - Columnas: ['fecha', 'indice_bvl', 'tipo_cambio', 'precio_cobre', 'tasa_referencia', 'ipc']
+2026-09-28 21:05:41,370 - INFO - Hash SHA-256: 5321762056ea3636f660fb5ff9596ef776cccf575c70fff45a900f95012386b0
+INFO:root:=== INICIO ANALISIS ===
+INFO:root:Datos cargados: 120 filas, 5 columnas
+INFO:root:Tabla descriptivos guardada
+INFO:root:Matriz correlacion guardada
+INFO:root:Grafico de series guardado
+INFO:root:R2 del modelo en niveles: 0.5945
+INFO:root:R2 del modelo en log-diferencias: 0.2253
+INFO:root:Graficos de dispersion guardados
+INFO:root:=== FIN ANALISIS ===

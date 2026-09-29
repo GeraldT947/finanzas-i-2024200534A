@@ -4,7 +4,7 @@
 - **Código:** 2024200534A
 - **Tema Unidad I:** Determinantes del índice S&P/BVL Perú General, 2015-2025 (Tema 44)
 - **Tema Unidad II:** Asociaciones público-privadas adjudicadas en el Perú (Tema 53)
-- **Docente:** Dr. Ciro Iván Machacuy Meza
+- **Docente:** Dr. Ciro Iván Machacuay Meza
 
 ## Fuentes de datos
 - **API 1:** Yahoo Finance (ticker: SPBLPGPT)

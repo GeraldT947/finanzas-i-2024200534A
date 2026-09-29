@@ -1,0 +1,28 @@
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:             indice_bvl   R-squared:                       0.253
+Model:                            OLS   Adj. R-squared:                  0.226
+Method:                 Least Squares   F-statistic:                     9.633
+Date:                Mon, 28 Sep 2026   Prob (F-statistic):           9.54e-07
+Time:                        21:07:19   Log-Likelihood:                 186.61
+No. Observations:                 119   AIC:                            -363.2
+Df Residuals:                     114   BIC:                            -349.3
+Df Model:                           4                                         
+Covariance Type:            nonrobust                                         
+===================================================================================
+                      coef    std err          t      P>|t|      [0.025      0.975]
+-----------------------------------------------------------------------------------
+const               0.0056      0.005      1.163      0.247      -0.004       0.015
+tipo_cambio        -0.7135      0.355     -2.011      0.047      -1.416      -0.011
+precio_cobre        0.4675      0.102      4.598      0.000       0.266       0.669
+tasa_referencia     0.0401      0.025      1.606      0.111      -0.009       0.090
+ipc                -0.0393      0.027     -1.465      0.146      -0.092       0.014
+==============================================================================
+Omnibus:                        5.153   Durbin-Watson:                   2.107
+Prob(Omnibus):                  0.076   Jarque-Bera (JB):                7.293
+Skew:                           0.078   Prob(JB):                       0.0261
+Kurtosis:                       4.203   Cond. No.                         75.4
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
